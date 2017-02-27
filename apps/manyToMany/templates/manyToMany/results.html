@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Survey Results</title>
+    </head>
+    <body>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <a href="{% url 'index' %}">Add User</a>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              {% for user in users %}
+              <tbody>
+                <tr>
+                  <td>
+                    {{user.user_name}}
+                  </td>
+                  <td>
+                    <button type="submit" name="button"><a href="/showinterest/{{ user.id }}">Show</a></button>
+                  </td>
+                  <td>
+                    <form action="/deleteuser/{{user.id}}" method="post">
+                      {% csrf_token %}
+                      <input type="submit" value="Delete User">
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+              {% endfor %}
+            </table>
+
+          </div>
+        </div>
+    </body>
+</html>

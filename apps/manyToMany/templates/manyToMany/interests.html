@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <button type="button" name="button"><a href="{% url 'showResults' %}">Back</a></button>
+
+        <th>User's Interest</th>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Interest</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          {% for interest in profile %}
+          <tbody>
+            <tr>
+                <td>
+                  {{ interest.interest_name }}
+                </td>
+                <td>
+                  <form action="/deleteInterest/{{interest.id}}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="delete">
+                  </form>
+                </td>
+            </tr>
+          </tbody>
+          {% endfor %}
+
+        </table>
+
+    </body>
+</html>
